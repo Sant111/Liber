@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Detail</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  {{post.body}}
+
+  <ion-list>
+    <ion-item *ngFor="let comment of comments | async">
+      {{comment.body}}
+    </ion-item>
+  </ion-list>
+
+  <ion-input [(ngModel)]="commentText"></ion-input>
+  <button ion-button (click)="addComment()">Kommenter</button>
+</ion-content>

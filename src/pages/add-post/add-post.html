@@ -1,0 +1,23 @@
+<ion-content class="background">
+  <h1>Legg til ny bok</h1>
+  <ion-card>
+    <ion-card-content>
+      <ion-input placeholder="Hva ønsker du å legge ut?" [(ngModel)]="postText"></ion-input>
+      <p><b>Sted: </b>{{locationAddress}}</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-grid>
+      <img *ngIf="previewImage.length > 0" style="height: 300px" [src]="'data:image/jpeg;base64,' + previewImage"/>
+    <ion-row>
+      <ion-col>
+        <button round ion-button color="dark" (click)="executeCamera()">Ta bilde</button>
+      </ion-col>
+      <ion-col>
+        <button round ion-button color="dark" (click)="findGeolocation()">Hent posisjon</button>
+      </ion-col>
+      <ion-col>
+        <button round ion-button color="dark" (click)="addPost()">Legg til ny bok</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

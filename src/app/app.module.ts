@@ -9,8 +9,13 @@ import { HomePage } from '../pages/home/home';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
+import { Camera } from '@ionic-native/camera';
+import { Geolocation } from '@ionic-native/geolocation';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { PlacesProvider } from '../providers/places/places';
+import { HttpClientModule } from '@angular/common/http';
 import env from './env';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -18,10 +23,15 @@ import env from './env';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      scrollAssist: false,
+      autoFocusAssist: false
+    }),
     AngularFireModule.initializeApp(env),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    HttpClientModule
     
   ],
   bootstrap: [IonicApp],
@@ -32,7 +42,10 @@ import env from './env';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Camera,
+    PlacesProvider,
+    Geolocation
   ]
 })
 export class AppModule {}

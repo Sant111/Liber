@@ -1,31 +1,20 @@
-
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>Authorize</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <ion-grid>
-    <ion-col>
-      <ion-row>
-        <!--bilde-->
-      </ion-row>
-      <ion-row>
-        <ion-label fixed>Brukernavn</ion-label>
-        <ion-input type="text" [(ngModel)]="user.username"></ion-input>
-      </ion-row>
-      <ion-row>
-        <ion-label fixed>Passord</ion-label>
-        <ion-input type="password" [(ngModel)]="user.password"></ion-input>
-      </ion-row>
-      <ion-row>
-        <button block ion-button (click)="loginUser()">Logg inn</button>
-        <button block ion-button (click)="registerUser()">Registrer bruker</button>
-      </ion-row>
-    </ion-col>
-  </ion-grid>
+<ion-content class ="background">
+  <h1>Libra</h1>
+  <ion-card> 
+    <ion-card-content>
+      <ion-list no-lines>
+        <ion-item>
+          <ion-label floating>Brukernavn</ion-label>
+          <ion-input type="text" [(ngModel)]="user.username"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>Passord</ion-label>
+            <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+          </ion-item>
+          <button round ion-button color="dark" (click)="loginUser()">Logg inn</button>
+        <button round ion-button color="dark" (click)="registerUser()">Registrer deg</button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
