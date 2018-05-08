@@ -44,5 +44,4 @@ export class AuthorizePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AuthorizePage');
   }
-
 }

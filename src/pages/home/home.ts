@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ActionSheet } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../../models/Post';

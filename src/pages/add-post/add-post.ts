@@ -20,6 +20,7 @@ private previewImage: string ="";
 public location: {latitude: number, longitude: number} = {latitude: 0, longitude: 0};
 private locationAddress: string ="";
 
+
 constructor(
   public navCtrl: NavController,
   public navParams: NavParams,
@@ -31,7 +32,14 @@ constructor(
     this.postCollection = navParams.get('postCollection');
   }
 
+
   addPost(){
+    this.postCollection.add({ body: this.postText } as Post).then(() => {
+        console.log("SUCCESS ADDED!");
+    }).catch((error) => {
+        console.log("ERROR OCCURED");
+    });
+    
     let imageFileName = `${this.af.app.auth().currentUser.email}_${new Date().getTime()}.png`;
 
     let task = this.afStorage
@@ -41,17 +49,22 @@ constructor(
     let uploadEvent = task.downloadURL();
     
     uploadEvent.subscribe((uploadImageUrl) =>{
+      console.log("UploadEvent Start");
+      
       this.postCollection.add({
         body: this.postText,
         locationAddress: this.locationAddress,
         author: this.af.app.auth().currentUser.email,
         imgUrl: uploadImageUrl
+        
       }as Post).then(response => {
-        console.log(response);
+        console.log(response + " success. " + JSON.stringify(response));
       }).catch(error => {
-        console.log(error);
+        console.log("ERROR" + error + ", lesbar: " + JSON.stringify(error));
       });
     });
+    console.log("UploadEvent end");
+     
   }
 
   findGeolocation(){
@@ -67,17 +80,20 @@ constructor(
         console.error(error);
       });
   }
+  
   executeCamera(){
     this.camera.getPicture({
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.Direction.BACK,
+      encodingType: this.camera.EncodingType.JPEG,
+      cameraDirection: this.camera.Direction.BACK,
       mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true
+      correctOrientation: true,
     })
     .then(imgBase64 =>{
       this.previewImage = imgBase64;
     });
+    console.log("Success");
   }
 
 }

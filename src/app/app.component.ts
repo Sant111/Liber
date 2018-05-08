@@ -9,7 +9,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any;
+  rootPage:any = HomePage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, af: AngularFirestore) {
 
@@ -20,8 +20,7 @@ export class MyApp {
         }else{
           this.rootPage = 'AuthorizePage';
         }
-      }
-    )
+      })
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
