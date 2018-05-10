@@ -6,6 +6,9 @@ import { AngularFireStorage }  from 'angularfire2/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PlacesProvider } from '../../providers/places/places';
 import { Post } from '../../models/Post';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { HttpClient } from '@angular/common/http';
+
 
 @IonicPage()
 @Component({
@@ -19,16 +22,23 @@ public postText: string ="";
 private previewImage: string ="";
 public location: {latitude: number, longitude: number} = {latitude: 0, longitude: 0};
 private locationAddress: string ="";
+private bokText: string="";
+public apiUrl = "https://itunes.apple.com/lookup?isbn=";
+public finalUrl: string;
+public price: string;
+
 
 
 constructor(
   public navCtrl: NavController,
+  public http: HttpClient,
   public navParams: NavParams,
   private camera: Camera,
   private af: AngularFirestore,
   private afStorage: AngularFireStorage,
   private geolocation: Geolocation,
-  private placesProvider: PlacesProvider){
+  private placesProvider: PlacesProvider,
+  private barcodeScanner: BarcodeScanner){
     this.postCollection = navParams.get('postCollection');
   }
 
@@ -48,9 +58,7 @@ constructor(
 
     let uploadEvent = task.downloadURL();
     
-    uploadEvent.subscribe((uploadImageUrl) =>{
-      console.log("UploadEvent Start");
-      
+    uploadEvent.subscribe((uploadImageUrl) =>{ 
       this.postCollection.add({
         body: this.postText,
         locationAddress: this.locationAddress,
@@ -63,8 +71,7 @@ constructor(
         console.log("ERROR" + error + ", lesbar: " + JSON.stringify(error));
       });
     });
-    console.log("UploadEvent end");
-     
+    this.navCtrl.pop();
   }
 
   findGeolocation(){
@@ -94,6 +101,31 @@ constructor(
       this.previewImage = imgBase64;
     });
     console.log("Success");
+  }
+
+  scanTheBar(){
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.bokText=barcodeData.text;
+      this.getInfoFromUrl();
+     }).catch(err => {
+         console.log('Error', err);
+     });
+  }
+
+  getInfoFromUrl(){
+    this.finalUrl = this.apiUrl + this.bokText;
+    return new Promise((resolve, reject) => {
+      this.http.get(this.finalUrl)
+      .subscribe((info : any) => {
+      console.log(this.finalUrl);
+        this.price = info.result.formattedPrice;
+        resolve(info);
+      }, (err) => {
+        reject(err);
+      })
+
+    })
   }
 
 }

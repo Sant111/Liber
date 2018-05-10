@@ -3,6 +3,7 @@
   <ion-card>
     <ion-card-content>
       <ion-input placeholder="Hva ønsker du å legge ut?" [(ngModel)]="postText"></ion-input>
+      <p>{{bokText}}</p>
       <p><b>Sted: </b>{{locationAddress}}</p>
       <img *ngIf="previewImage.length > 0" style="height: 200px" [src]="'data:image/jpeg;base64,' + previewImage"/>
     </ion-card-content>
@@ -12,6 +13,9 @@
       <ion-col>
         <button block outline ion-button secondary medium color="dark" (click)="executeCamera()">Ta bilde</button>
       </ion-col>
+      <ion-col>
+          <button block outline ion-button secondary medium color="dark" (click)="scanTheBar()">Scann boka</button>
+        </ion-col>
       <ion-col>
         <button block outline ion-button secondary medium color="dark" (click)="findGeolocation()">Legg til sted</button>
       </ion-col>

@@ -1,17 +1,17 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Detail</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-<ion-content padding>
-  {{post.body}}
+<ion-content class="background">
+  <h1>Libra</h1>
+<ion-card>
+  <ion-card-content>
+      {{post.body}}
+      <img [src]="post.imgUrl"/>
+  </ion-card-content>
+</ion-card>
+  
   <ion-list>
-    <ion-item *ngFor="let comment of comments | async">
+    <ion-item *ngFor="let comment of comments | async" class="background">
       {{comment.body}}
     </ion-item>
   </ion-list>
-  <ion-input [(ngModel)]="commentText"></ion-input>
-  <button ion-button (click)="addComment()">Kommenter</button>
+  <ion-input placeholder="Kommentar" [(ngModel)]="commentText"></ion-input>
+  <button block outline ion-button secondary medium color="dark" (click)="addComment()">Legg til kommentar</button>
 </ion-content>

@@ -14,12 +14,14 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { PlacesProvider } from '../providers/places/places';
 import { HttpClientModule } from '@angular/common/http';
+
 import env from './env';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import env from './env';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    HttpClientModule
+    HttpClientModule,
+
     
   ],
   bootstrap: [IonicApp],
@@ -45,7 +48,8 @@ import env from './env';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Camera,
     PlacesProvider,
-    Geolocation
+    Geolocation,
+    BarcodeScanner
   ]
 })
 export class AppModule {}

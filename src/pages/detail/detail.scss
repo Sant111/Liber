@@ -1,3 +1,24 @@
 page-detail {
+    .background{
+        width: 100%;
+        height: 100%;
+
+        background: whitesmoke;
+    }
+
+    ion-card.card{
+        background: whitesmoke;
+        height: 50%;
+        border-radius: 10px;
+    }
+
+    h1{
+        color: black;
+        font-size: 3em;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: lighter;
+        left: 50%;
+        text-align: center;
+    }
 
 }

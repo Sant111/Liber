@@ -5,7 +5,14 @@ page-home {
         background: whitesmoke;
     }
     .toolbar-title { 
-        font-size: 2rem;
+        font-size: 3rem;
         font-family: 'Times New Roman', Times, serif;
-      }
+        text-align: center;
+    }
+    ion-card.card{
+        background: whitesmoke;
+        height: 55%;
+        border-radius: 10px;
+    }
+
 }
