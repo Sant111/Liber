@@ -20,9 +20,9 @@ export class MyApp {
         }else{
           this.rootPage = 'AuthorizePage';
         }
-      });
+      })
 
-    platform.ready().then(() => {
+      platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });

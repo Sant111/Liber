@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { Camera } from '@ionic-native/camera';
 import { AngularFireStorage }  from 'angularfire2/storage';
@@ -34,6 +34,7 @@ constructor(
   public http: HttpClient,
   public navParams: NavParams,
   private camera: Camera,
+  public toastController: ToastController,
   private af: AngularFirestore,
   private afStorage: AngularFireStorage,
   private geolocation: Geolocation,
@@ -44,11 +45,6 @@ constructor(
 
 
   addPost(){
-    this.postCollection.add({ body: this.postText } as Post).then(() => {
-        console.log("SUCCESS ADDED!");
-    }).catch((error) => {
-        console.log("ERROR OCCURED");
-    });
     
     let imageFileName = `${this.af.app.auth().currentUser.email}_${new Date().getTime()}.png`;
 
@@ -67,6 +63,7 @@ constructor(
         
       }as Post).then(response => {
         console.log(response + " success. " + JSON.stringify(response));
+        this.toasty();
       }).catch(error => {
         console.log("ERROR" + error + ", lesbar: " + JSON.stringify(error));
       });
@@ -124,10 +121,16 @@ constructor(
       }, (err) => {
         reject(err);
       })
-
     })
   }
 
+  toasty(){
+    let toast = this.toastController.create({
+      message: 'Boken er lagt til',
+      duration: 2000
+    });
+    toast.present();
+  }
 }
 
 

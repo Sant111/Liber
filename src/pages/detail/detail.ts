@@ -34,4 +34,7 @@ export class DetailPage {
       });
   }
 
+  backToHome(){
+    this.navCtrl.pop();
+  }
 }
