@@ -1,15 +1,17 @@
 <ion-header>
   <ion-navbar>
+      <ion-buttons end>
+          <button icon-only ion-button color="dark" (click)="goToAddPostPage()">
+           <ion-icon name="add"></ion-icon>
+           </button>
+        </ion-buttons>
     <ion-title>
       Libra
     </ion-title>
-    <ion-buttons end>
-      <button icon-only ion-button color="dark" (click)="goToAddPostPage()">
-       <ion-icon name="add"></ion-icon>
-       </button>
-      <button icon-only ion-button color="dark" (click)="logout()">
-        <ion-icon name="log-out"></ion-icon>
-      </button>
+    <ion-buttons start>
+        <button icon-only ion-button color="dark" (click)="logout()">
+            <ion-icon name="log-out"></ion-icon>
+          </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
